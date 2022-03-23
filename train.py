@@ -357,7 +357,8 @@ def main():
                 use_auth_token=True if model_args.use_auth_token else None,
                 model_args=model_args                  
             )
-        elif 'bert' in model_args.model_name_or_path:
+        # elif 'bert' in model_args.model_name_or_path:
+        else:
             model = BertForCL.from_pretrained(
                 model_args.model_name_or_path,
                 from_tf=bool(".ckpt" in model_args.model_name_or_path),
@@ -370,8 +371,8 @@ def main():
             if model_args.do_mlm:
                 pretrained_model = BertForPreTraining.from_pretrained(model_args.model_name_or_path)
                 model.lm_head.load_state_dict(pretrained_model.cls.predictions.state_dict())
-        else:
-            raise NotImplementedError
+        # else:
+        #    raise NotImplementedError
     else:
         raise NotImplementedError
         logger.info("Training new model from scratch")
