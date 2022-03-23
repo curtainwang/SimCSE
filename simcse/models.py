@@ -278,7 +278,8 @@ class BertForCL(BertPreTrainedModel):
     def __init__(self, config, *model_args, **model_kargs):
         super().__init__(config)
         self.model_args = model_kargs["model_args"]
-        self.bert = BertModel(config, add_pooling_layer=False)
+        # self.bert = BertModel(config, add_pooling_layer=False)
+        self.bert = BertModel(config)
 
         if self.model_args.do_mlm:
             self.lm_head = BertLMPredictionHead(config)
@@ -337,7 +338,8 @@ class RobertaForCL(RobertaPreTrainedModel):
     def __init__(self, config, *model_args, **model_kargs):
         super().__init__(config)
         self.model_args = model_kargs["model_args"]
-        self.roberta = RobertaModel(config, add_pooling_layer=False)
+        # self.roberta = RobertaModel(config, add_pooling_layer=False)
+        self.roberta = RobertaModel(config)
 
         if self.model_args.do_mlm:
             self.lm_head = RobertaLMHead(config)
